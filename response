@@ -1,0 +1,56 @@
+curl -X POST https://assessment.ksensetech.com/api/submit-assessment \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -d '{
+    "high_risk_patients": ["DEMO002", "DEMO031"],
+    "fever_patients": ["DEMO005", "DEMO021"],
+    "data_quality_issues": ["DEMO004", "DEMO007"]
+  }'
+
+
+########################################################################
+  {
+  "success": true,
+  "message": "Assessment submitted successfully",
+  "results": {
+    "score": 91.94,
+    "percentage": 92,
+    "status": "PASS",
+    "breakdown": {
+      "high_risk": {
+        "score": 48,
+        "max": 50,
+        "correct": 20,
+        "submitted": 21,
+        "matches": 20
+      },
+      "fever": {
+        "score": 19,
+        "max": 25,
+        "correct": 9,
+        "submitted": 7,
+        "matches": 7
+      },
+      "data_quality": {
+        "score": 25,
+        "max": 25,
+        "correct": 8,
+        "submitted": 8,
+        "matches": 8
+      }
+    },
+    "feedback": {
+      "strengths": [
+        "✅ Data quality issues: Perfect score (8/8)"
+      ],
+      "issues": [
+        "🔄 High-risk patients: 20/20 correct, but 1 incorrectly included",
+        "🔄 Fever patients: 7/9 correct, but 2 missed"
+      ]
+    },
+    "attempt_number": 1,
+    "remaining_attempts": 2,
+    "is_personal_best": true,
+    "can_resubmit": true
+  }
+}
